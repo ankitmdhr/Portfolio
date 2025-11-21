@@ -1,7 +1,0 @@
-# .gitignore
-.env
-db.sqlite3
-mediafiles/
-venv/
-staticfiles/
-__pycache__/
