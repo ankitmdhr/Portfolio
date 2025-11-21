@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+<!-- === CORRECTED SEO Block Structure === -->
+{% block seo_title %}Services | Ankit Manandhar{% endblock %}
+{% block seo_description %}Explore the professional photography, videography, and editing services offered by Ankit Manandhar.{% endblock %}
+
+{% block og_title %}Services | Ankit Manandhar{% endblock %}
+{% block og_description %}Explore the professional photography, videography, and editing services offered by Ankit Manandhar.{% endblock %}
+
+{% block twitter_title %}Services | Ankit Manandhar{% endblock %}
+{% block twitter_description %}Explore the professional photography, videography, and editing services offered by Ankit Manandhar.{% endblock %}
+
+
+{% block content %}
+<section class="py-20 md:py-32 hero-bg">
+    <div class="container mx-auto px-6 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold tracking-tighter">My Services</h1>
+        <p class="max-w-2xl mx-auto text-slate-300 md:text-lg mt-4">High-quality visual solutions tailored to your needs.</p>
+    </div>
+</section>
+
+<section class="py-20 md:py-32">
+    <div class="container mx-auto px-6 max-w-4xl">
+        <div class="space-y-16">
+            <!-- Service 1: Photography -->
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-1 text-center">
+                    <div class="inline-block p-6 bg-slate-800/50 rounded-full mb-4">
+                        <i data-lucide="camera" class="w-12 h-12 text-white"></i>
+                    </div>
+                </div>
+                <div class="md:col-span-2">
+                    <h2 class="text-3xl font-bold mb-2">Photography</h2>
+                    <p class="text-slate-300 leading-relaxed">From portraits and events to commercial and product shoots, I provide stunning, high-resolution images that capture the essence of the moment. My goal is to deliver photos that are not just seen, but felt.</p>
+                </div>
+            </div>
+            <!-- Service 2: Videography -->
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-1 text-center">
+                     <div class="inline-block p-6 bg-slate-800/50 rounded-full mb-4">
+                        <i data-lucide="video" class="w-12 h-12 text-white"></i>
+                    </div>
+                </div>
+                <div class="md:col-span-2">
+                    <h2 class="text-3xl font-bold mb-2">Videography</h2>
+                    <p class="text-slate-300 leading-relaxed">Bringing stories to life through cinematic video. I handle everything from corporate videos and documentaries to promotional content and music videos, ensuring a polished, professional final product that engages your audience.</p>
+                </div>
+            </div>
+            <!-- Service 3: Editing -->
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-1 text-center">
+                     <div class="inline-block p-6 bg-slate-800/50 rounded-full mb-4">
+                        <i data-lucide="scissors" class="w-12 h-12 text-white"></i>
+                    </div>
+                </div>
+                <div class="md:col-span-2">
+                    <h2 class="text-3xl font-bold mb-2">Post-Production & Editing</h2>
+                    <p class="text-slate-300 leading-relaxed">The final touch that makes all the difference. I offer comprehensive post-production services, including color grading, sound design, motion graphics, and final editing to ensure your vision is perfectly realized.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide-dev@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- SEO Meta Tags -->
+    <title>{% block seo_title %}Ankit Manandhar | Photographer & Cinematographer{% endblock %}</title>
+    <meta name="description" content="{% block seo_description %}Portfolio of Ankit Manandhar, a professional photographer, videographer, and editor based in Kathmandu.{% endblock %}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block seo_og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.get_full_path }}">
+    <meta property="og:title" content="{% block seo_og_title %}Ankit Manandhar | Photographer & Cinematographer{% endblock %}">
+    <meta property="og:description" content="{% block seo_og_description %}Portfolio of Ankit Manandhar, a professional photographer, videographer, and editor based in Kathmandu.{% endblock %}">
+    <meta property="og:image" content="{% block seo_og_image %}{% endblock %}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.get_full_path }}">
+    <meta property="twitter:title" content="{% block seo_twitter_title %}Ankit Manandhar | Photographer & Cinematographer{% endblock %}">
+    <meta property="twitter:description" content="{% block seo_twitter_description %}Portfolio of Ankit Manandhar, a professional photographer, videographer, and editor based in Kathmandu.{% endblock %}">
+    <meta property="twitter:image" content="{% block seo_twitter_image %}{% endblock %}">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* bg-slate-900 */
+            color: #e2e8f0; /* text-slate-200 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Style for TinyMCE content */
+        .prose {
+            color: #cbd5e1; /* text-slate-300 */
+        }
+        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+            color: #f1f5f9; /* text-slate-100 */
+        }
+        .prose a {
+            color: #38bdf8; /* text-sky-400 */
+            text-decoration: underline;
+        }
+
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            transition: max-height 0.3s ease-out, opacity 0.2s ease-out;
+        }
+        #mobile-menu.hidden {
+            max-height: 0;
+            opacity: 0;
+            pointer-events: none;
+        }
+        #mobile-menu:not(.hidden) {
+            max-height: 500px; /* Adjust as needed */
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+    <!-- === Header & Navigation === -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" id="navbar">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="{% url 'portfolio_page' %}#home" class="text-2xl font-bold tracking-tighter">Ankit Manandhar</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="{% url 'portfolio_page' %}#work" class="text-slate-300 hover:text-white transition-colors">Work</a>
+                <a href="{% url 'portfolio_page' %}#about" class="text-slate-300 hover:text-white transition-colors">About</a>
+                <a href="{% url 'blog_list' %}" class="text-slate-300 hover:text-white transition-colors">Blog</a>
+                <a href="{% url 'services_page' %}" class="text-slate-300 hover:text-white transition-colors">Services</a>
+                <a href="{% url 'portfolio_page' %}#contact" 
+                   class="bg-white text-slate-950 font-semibold py-2 px-5 rounded-lg
+                          hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950">
+                   Contact
+                </a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" aria-label="Toggle Menu">
+                    <i data-lucide="menu" class="w-6 h-6" id="menu-icon-open"></i>
+                    <i data-lucide="x" class="w-6 h-6 hidden" id="menu-icon-close"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="md:hidden hidden overflow-hidden bg-slate-900 shadow-xl">
+            <div class="flex flex-col space-y-4 p-6">
+                <a href="{% url 'portfolio_page' %}#work" class="block text-lg text-slate-300 hover:text-white transition-colors">Work</a>
+                <a href="{% url 'portfolio_page' %}#about" class="block text-lg text-slate-300 hover:text-white transition-colors">About</a>
+                <a href="{% url 'blog_list' %}" class="block text-lg text-slate-300 hover:text-white transition-colors">Blog</a>
+                <a href="{% url 'services_page' %}" class="block text-lg text-slate-300 hover:text-white transition-colors">Services</a>
+                <a href="{% url 'portfolio_page' %}#contact" 
+                   class="w-full text-center bg-cyan-600 text-white font-semibold py-3 px-5 rounded-lg
+                          hover:bg-cyan-500 transition-colors">
+                   Contact
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- === Main Content === -->
+    <main>
+        {% block content %}
+        <!-- Child templates will fill this block -->
+        {% endblock %}
+    </main>
+
+    <!-- === Footer === -->
+    <footer class="py-16 bg-slate-950 border-t border-slate-800">
+        <div class="container mx-auto px-6 text-center text-slate-400">
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="mailto:hello@ankitmanandhar.com" class="hover:text-white transition-colors" aria-label="Email">
+                    <i data-lucide="mail" class="w-6 h-6"></i>
+                </a>
+                <a href="https://instagram.com/ankitmanandhar" target="_blank" class="hover:text-white transition-colors" aria-label="Instagram">
+                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                </a>
+                <a href="https://facebook.com/ankitmanandhar" target="_blank" class="hover:text-white transition-colors" aria-label="Facebook">
+                    <i data-lucide="facebook" class="w-6 h-6"></i>
+                </a>
+            </div>
+            <p>&copy; {% now "Y" %} Ankit Manandhar. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JS for Lucide Icons, Navbar, and Mobile Menu -->
+    <script>
+        lucide.createIcons();
+
+        // Navbar background on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-slate-900', 'shadow-lg');
+            } else {
+                // Only remove if menu is NOT open
+                if (document.getElementById('mobile-menu').classList.contains('hidden')) {
+                    navbar.classList.remove('bg-slate-900', 'shadow-lg');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            iconOpen.classList.toggle('hidden');
+            iconClose.classList.toggle('hidden');
+            
+            // Add bg/shadow to navbar when menu is open
+            if (!mobileMenu.classList.contains('hidden')) {
+                navbar.classList.add('bg-slate-900', 'shadow-lg');
+            } else if (window.scrollY <= 20) {
+                navbar.classList.remove('bg-slate-900', 'shadow-lg');
+            }
+        });
+
+        // Close menu when a link is clicked
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                iconOpen.classList.remove('hidden');
+                iconClose.classList.add('hidden');
+                if (window.scrollY <= 20) {
+                    navbar.classList.remove('bg-slate-900', 'shadow-lg');
+                }
+            });
+        });
+    </script>
+    
+    {% block extra_js %}
+    <!-- Child templates can add extra JS here -->
+    {% endblock %}
+
+</body>
+</html>
+

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block seo_title %}Blog | Ankit Manandhar{% endblock %}
+{% block seo_description %}Explore articles, tips, and behind-the-scenes stories from Ankit Manandhar.{% endblock %}
+
+{% block seo_og_title %}Blog | Ankit Manandhar{% endblock %}
+{% block seo_og_description %}Explore articles, tips, and behind-the-scenes stories from Ankit Manandhar.{% endblock %}
+{% block seo_twitter_title %}Blog | Ankit Manandhar{% endblock %}
+{% block seo_twitter_description %}Explore articles, tips, and behind-the-scenes stories from Ankit Manandhar.{% endblock %}
+
+
+{% block content %}
+<div class="pt-24 pb-16 sm:pt-32 sm:pb-24">
+    <div class="container mx-auto px-6">
+        
+        <!-- Header -->
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h1 class="text-4xl sm:text-5xl font-bold tracking-tighter text-white mb-4">From the Blog</h1>
+            <p class="text-lg text-slate-300">
+                Explore behind-the-scenes stories, technical tips, and my personal thoughts
+                on the world of photography and videography.
+            </p>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-6xl mx-auto">
+            {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}" class="block group">
+                <div class="overflow-hidden rounded-lg mb-6 shadow-lg">
+                    <img src="{{ post.featured_image.url }}" alt="{{ post.title }}"
+                         class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+                <p class="text-sm text-slate-400 mb-2">{{ post.created_at|date:"F d, Y" }}</p>
+                <h3 class="text-2xl font-semibold text-white group-hover:text-cyan-400 transition-colors">{{ post.title }}</h3>
+            </a>
+            {% empty %}
+            <p class="text-center text-slate-400 md:col-span-2 lg:col-span-3">No blog posts added yet. Check back soon!</p>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+

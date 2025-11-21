@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- === Hero Section === -->
+<section id="home" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <!-- Video Background -->
+    <video 
+        autoplay 
+        loop 
+        muted 
+        playsinline
+        class="absolute z-0 w-auto min-w-full min-h-full max-w-none left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-cover opacity-20"
+        poster="https://placehold.co/1920x1080/0f172a/e2e8f0?text=Loading...">
+        
+        {% if site_config and site_config.hero_video %}
+            <source src="{{ site_config.hero_video.url }}" type="video/mp4">
+        {% else %}
+            <source src="https://placehold.co/1920x1080/0f172a/0f172a.mp4" type="video/mp4">
+        {% endif %}
+        
+    </video>
+    <div class="absolute z-10 inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>
+    
+    <div class="container mx-auto px-6 z-20">
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-4 text-white">
+            Ankit Manandhar
+        </h1>
+        <p class="text-xl sm:text-2xl text-slate-300 max-w-3xl mx-auto">
+            Photographer, Videographer, and Editor capturing stories that matter.
+        </p>
+        <a href="#work" class="mt-8 inline-block bg-white text-slate-950 font-semibold py-3 px-8 rounded-lg text-lg hover:bg-slate-200 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-950">
+            View My Work
+        </a>
+    </div>
+</section>
+
+<!-- === Work Section === -->
+<section id="work" class="py-24 sm:py-32">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter text-center mb-6">Selected Work</h2>
+        
+        <div id="filter-buttons" class="flex justify-center space-x-2 sm:space-x-4 mb-12">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="photography">Photography</button>
+            <button class="filter-btn" data-filter="videography">Videography</button>
+            <button class="filter-btn" data-filter="editing">Editing</button>
+        </div>
+
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for item in portfolio_items %}
+            <a href="{{ item.get_absolute_url }}" class="portfolio-item group block rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2" data-category="{{ item.category }}">
+                <div class="relative aspect-[4/3] w-full overflow-hidden">
+                    {% if item.video_file %}
+                        <video loop muted playsinline class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                            <source src="{{ item.video_file.url }}" type="video/mp4">
+                        </video>
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <i data-lucide="play" class="w-12 h-12 text-white"></i>
+                        </div>
+                    {% elif item.image_file %}
+                        <img src="{{ item.image_file.url }}" alt="{{ item.title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            {% if item.video_url %}<i data-lucide="play" class="w-12 h-12 text-white"></i>{% else %}<i data-lucide="eye" class="w-12 h-12 text-white"></i>{% endif %}
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="p-5 bg-slate-800">
+                    <h3 class="font-semibold text-lg text-white">{{ item.title }}</h3>
+                    <p class="text-sm text-slate-400 capitalize">{{ item.get_category_display }}</p>
+                </div>
+            </a>
+            {% empty %}
+             <p class="text-center text-slate-400 md:col-span-2 lg:col-span-3">No portfolio items added yet. Check back soon!</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- === About Section === -->
+<section id="about" class="py-24 sm:py-32 bg-slate-950">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div>
+                {% if site_config and site_config.about_image %}
+                    <img src="{{ site_config.about_image.url }}" alt="Ankit Manandhar" class="rounded-lg shadow-xl w-full h-auto object-cover">
+                {% else %}
+                    <img src="https://placehold.co/600x800/1e293b/e2e8f0?text=Ankit+Manandhar" class="rounded-lg shadow-xl w-full h-auto object-cover">
+                {% endif %}
+            </div>
+            <div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter mb-6">About Me</h2>
+                <p class="text-lg text-slate-300 mb-4">
+                    Hello! I'm Ankit Manandhar, a Kathmandu-based photographer, videographer, and editor.
+                    My passion is to craft compelling visual narratives that resonate with emotion and authenticity.
+                </p>
+                <p class="text-lg text-slate-300 mb-8">
+                    With years of experience in both digital and film, I've had the privilege of working on diverse projects, 
+                    from intimate portraits and commercial shoots to documentary films and dynamic event coverage.
+                </p>
+                <a href="#contact" class="inline-block bg-white text-slate-950 font-semibold py-3 px-8 rounded-lg text-lg hover:bg-slate-200 transition-colors">
+                    Let's Create Together
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- === Testimonials Section === -->
+<section id="testimonials" class="py-24 sm:py-32">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter text-center mb-16">What Clients Say</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for testimonial in testimonials %}
+            <div class="bg-slate-800 p-8 rounded-lg shadow-lg border border-slate-700">
+                <i data-lucide="quote" class="w-8 h-8 text-cyan-500 mb-4"></i>
+                <p class="text-lg text-slate-300 mb-6">"{{ testimonial.quote }}"</p>
+                <p class="font-semibold text-white">{{ testimonial.client_name }}</p>
+                {% if testimonial.company %}
+                <p class="text-sm text-slate-400">{{ testimonial.company }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- === Blog Section === -->
+<section id="blog" class="py-24 sm:py-32 bg-slate-950">
+    <div class="container mx-auto px-6">
+        <div class="flex justify-between items-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter">From the Blog</h2>
+            <a href="{% url 'blog_list' %}" class="text-cyan-400 font-semibold flex items-center space-x-2 group hover:text-cyan-300 transition-colors">
+                <span>View All Posts</span>
+                <i data-lucide="arrow-right" class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"></i>
+            </a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for post in latest_posts %}
+            <a href="{{ post.get_absolute_url }}" class="block group">
+                <div class="overflow-hidden rounded-lg mb-4 shadow-lg">
+                    <img src="{{ post.featured_image.url }}" class="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+                <p class="text-sm text-slate-400 mb-2">{{ post.created_at|date:"F d, Y" }}</p>
+                <h3 class="text-xl font-semibold text-white group-hover:text-cyan-400 transition-colors">{{ post.title }}</h3>
+            </a>
+            {% empty %}
+            <p class="text-slate-400">No posts yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- === Contact Section === -->
+<section id="contact" class="py-24 sm:py-32">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            
+            <!-- Contact Info Column -->
+            <div>
+                <h2 class="text-3xl sm:text-4xl font-bold tracking-tighter mb-6">Get In Touch</h2>
+                <p class="text-lg text-slate-300 mb-10">
+                    Have a project in mind or just want to say hello? 
+                    I'd love to hear from you.
+                </p>
+                
+                <div class="space-y-8">
+                    <!-- Email Block -->
+                    <div class="flex items-center space-x-4 group">
+                        <div class="bg-slate-800 p-4 rounded-full group-hover:bg-cyan-900 transition-colors">
+                            <i data-lucide="mail" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-400 text-sm mb-1">Email Me</p>
+                            <a href="mailto:manandharankit007@gmail.com" class="text-xl font-semibold text-white hover:text-cyan-400 transition-colors">
+                                manandharankit007@gmail.com
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Block -->
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-slate-800 p-4 rounded-full">
+                            <i data-lucide="share-2" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <p class="text-slate-400 text-sm mb-2">Follow Me</p>
+                            <div class="flex space-x-4">
+                                <!-- Instagram -->
+                                <a href="https://www.instagram.com/ankitmdhr/" target="_blank" aria-label="Instagram"
+                                   class="bg-slate-800 p-3 rounded-full text-slate-300 hover:text-white hover:bg-pink-600 transition-all transform hover:-translate-y-1">
+                                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                                </a>
+                                <!-- Facebook -->
+                                <a href="https://www.facebook.com/ankit.manandhar.94" target="_blank" aria-label="Facebook"
+                                   class="bg-slate-800 p-3 rounded-full text-slate-300 hover:text-white hover:bg-blue-600 transition-all transform hover:-translate-y-1">
+                                    <i data-lucide="facebook" class="w-6 h-6"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form Column -->
+            <div class="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
+                {% if message_sent %}
+                <div class="bg-green-900/50 border border-green-600 text-green-100 p-6 rounded-lg text-center">
+                    <h3 class="text-xl font-semibold mb-2">Message Sent!</h3>
+                    <p>Thank you for reaching out. I'll get back to you shortly.</p>
+                </div>
+                {% else %}
+                <form action="{% url 'portfolio_page' %}#contact" method="POST" class="space-y-6">
+                    {% csrf_token %}
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Full Name</label>
+                        <input type="text" name="name" id="name" required placeholder="Full Name"
+                               class="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-white placeholder-slate-500
+                                      focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                        <input type="email" name="email" id="email" required placeholder="Email Address"
+                               class="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-white placeholder-slate-500
+                                      focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                        <textarea name="message" id="message" rows="5" required placeholder="Tell me about your project..."
+                                  class="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 text-white placeholder-slate-500
+                                         focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-all"></textarea>
+                    </div>
+                    <button type="submit"
+                            class="w-full bg-white text-slate-900 font-bold py-3 px-8 rounded-lg text-lg
+                                   hover:bg-slate-200 hover:shadow-lg transition-all duration-300">
+                        Send Message
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
