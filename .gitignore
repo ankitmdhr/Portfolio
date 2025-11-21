@@ -1,0 +1,33 @@
+Django
+
+*.log
+*.pot
+*.pyc
+pycache/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+Environment Variables (CRITICAL: Keep this secret)
+
+.env
+
+Virtual Environment
+
+venv/
+env/
+.venv/
+
+Static and Media files
+
+We want to keep the folders but not the content inside them for local development
+
+staticfiles/
+mediafiles/
+/media/
+
+Text Editors / IDEs
+
+.vscode/
+.idea/
+*.swp
