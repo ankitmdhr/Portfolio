@@ -4,3 +4,4 @@ gunicorn
 python-dotenv
 whitenoise
 django-tinymce
+dj-database-url==2.1.0
